@@ -1,0 +1,122 @@
+El proceso padre no tiene acceso a la memoria del hijo. Inicialmente el hijo y 
+el padre comparten recursos. Cuando el hijo intenta modificar la estructura
+se crea una copia(Copy-On-Write) a la que solo puede hacer el hijo.
+
+Como los dos procesos no comparten la misma memoria, hay que liberar memoria en
+los dos procesos, tal como se puede observar usando valgrind:
+
+
+
+/* FREE SOLO EN EL PADRE */
+
+mihai314:~/workspace/practica1 (master) $ valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./ej6
+==2418== Memcheck, a memory error detector
+==2418== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==2418== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==2418== Command: ./ej6
+==2418== 
+Inserte un nombre por teclado: qwerty
+HIJO: Cadena = qwerty
+
+==2419== 
+==2419== HEAP SUMMARY:
+==2419==     in use at exit: 88 bytes in 1 blocks
+==2419==   total heap usage: 1 allocs, 0 frees, 88 bytes allocated
+==2419== 
+==2419== 88 bytes in 1 blocks are still reachable in loss record 1 of 1
+==2419==    at 0x4C2CC70: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2419==    by 0x4007C4: main (in /home/ubuntu/workspace/practica1/ej6)
+==2419== 
+==2419== LEAK SUMMARY:
+==2419==    definitely lost: 0 bytes in 0 blocks
+==2419==    indirectly lost: 0 bytes in 0 blocks
+==2419==      possibly lost: 0 bytes in 0 blocks
+==2419==    still reachable: 88 bytes in 1 blocks
+==2419==         suppressed: 0 bytes in 0 blocks
+==2419== 
+==2419== For counts of detected and suppressed errors, rerun with: -v
+==2419== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+PADRE: Cadena = Contenido inicial que deberia ser sobreescrito por el hijo si comparten memoria
+==2418== 
+==2418== HEAP SUMMARY:
+==2418==     in use at exit: 0 bytes in 0 blocks
+==2418==   total heap usage: 1 allocs, 1 frees, 88 bytes allocated
+==2418== 
+==2418== All heap blocks were freed -- no leaks are possible
+==2418== 
+==2418== For counts of detected and suppressed errors, rerun with: -v
+==2418== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+
+/* FREE SOLO EN EL HIJO */
+
+mihai314:~/workspace/practica1 (master) $ valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./ej6
+==2449== Memcheck, a memory error detector
+==2449== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==2449== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==2449== Command: ./ej6
+==2449== 
+Inserte un nombre por teclado: QWERTY2
+HIJO: Cadena = QWERTY2
+
+==2450== 
+==2450== HEAP SUMMARY:
+==2450==     in use at exit: 0 bytes in 0 blocks
+==2450==   total heap usage: 1 allocs, 1 frees, 88 bytes allocated
+==2450== 
+==2450== All heap blocks were freed -- no leaks are possible
+==2450== 
+==2450== For counts of detected and suppressed errors, rerun with: -v
+==2450== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+PADRE: Cadena = Contenido inicial que deberia ser sobreescrito por el hijo si comparten memoria
+==2449== 
+==2449== HEAP SUMMARY:
+==2449==     in use at exit: 88 bytes in 1 blocks
+==2449==   total heap usage: 1 allocs, 0 frees, 88 bytes allocated
+==2449== 
+==2449== 88 bytes in 1 blocks are still reachable in loss record 1 of 1
+==2449==    at 0x4C2CC70: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2449==    by 0x4007C4: main (in /home/ubuntu/workspace/practica1/ej6)
+==2449== 
+==2449== LEAK SUMMARY:
+==2449==    definitely lost: 0 bytes in 0 blocks
+==2449==    indirectly lost: 0 bytes in 0 blocks
+==2449==      possibly lost: 0 bytes in 0 blocks
+==2449==    still reachable: 88 bytes in 1 blocks
+==2449==         suppressed: 0 bytes in 0 blocks
+==2449== 
+==2449== For counts of detected and suppressed errors, rerun with: -v
+==2449== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+
+
+/*   FREE EN LOS DOS    */
+
+mihai314:~/workspace/practica1 (master) $ valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./ej6
+==2477== Memcheck, a memory error detector
+==2477== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==2477== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==2477== Command: ./ej6
+==2477== 
+Inserte un nombre por teclado: QWERTY3
+HIJO: Cadena = QWERTY3
+
+==2478== 
+==2478== HEAP SUMMARY:
+==2478==     in use at exit: 0 bytes in 0 blocks
+==2478==   total heap usage: 1 allocs, 1 frees, 88 bytes allocated
+==2478== 
+==2478== All heap blocks were freed -- no leaks are possible
+==2478== 
+==2478== For counts of detected and suppressed errors, rerun with: -v
+==2478== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+PADRE: Cadena = Contenido inicial que deberia ser sobreescrito por el hijo si comparten memoria
+==2477== 
+==2477== HEAP SUMMARY:
+==2477==     in use at exit: 0 bytes in 0 blocks
+==2477==   total heap usage: 1 allocs, 1 frees, 88 bytes allocated
+==2477== 
+==2477== All heap blocks were freed -- no leaks are possible
+==2477== 
+==2477== For counts of detected and suppressed errors, rerun with: -v
+==2477== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

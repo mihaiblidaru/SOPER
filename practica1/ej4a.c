@@ -1,3 +1,15 @@
+/**
+ * Ej 4
+ * Programa que lanza un hijo e imprime el pid del proceso padre
+ * 
+ * 
+ * @author Lucia Fuentes
+ * @author Mihai Blidaru
+ * @date 19/02/2018
+ * 
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,10 +26,10 @@ int main (void){
                 printf("Error al emplear fork\n");
                 exit(EXIT_FAILURE);
             }else if (pid ==0){
-                printf("HIJO  %d\n");     
-            }else{
+                printf("Soy hijo: %d\tPPID = %d\n", getpid(), getppid());     
+            }/*else{
                 printf ("PADRE %d \n");  
-            }
+            }*/
         }
     }
     exit(EXIT_SUCCESS);

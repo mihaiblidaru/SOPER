@@ -16,16 +16,14 @@ int main (void){
                 printf("Error haciendo fork\n");
                 exit(EXIT_FAILURE);
             }else if (pid == 0){
-                printf("HIJO %d\n", getpid());   
-                break;
+                printf("HIJO %d\t PPID = %d\n", getpid(),getppid());
             }else{
-            	printf ("PADRE %d\n", getpid());  
-            	waitpid(pid,  &status, WUNTRACED);
+            	//printf ("PADRE %d\n", getpid());  
+            	waitpid(pid,  &status, 0);
+            	break;
             }
         }
     }
-
-    sleep(30);
 
     exit(EXIT_SUCCESS);
 }

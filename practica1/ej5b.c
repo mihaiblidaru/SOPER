@@ -1,3 +1,15 @@
+/**
+ * Ejercicio 5, apartado B
+ * 
+ * Un único proceso padre da lugar a un conjunto de procesos hijo para i % 2 != 0. 
+ * El proceso padre ha de esperar a que termine la ejecución de todos sus 
+ * procesos hijo.
+ *
+ * @author Lucia Fuentes
+ * @author Mihai Blidaru
+ * @date 20/02/2018
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -25,7 +37,6 @@ int main (void){
         }
     }
 
-    sleep(30);
 
     exit(EXIT_SUCCESS);
 }
