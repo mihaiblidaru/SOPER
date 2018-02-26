@@ -1,9 +1,36 @@
+/**
+ * Ejercicio 8: Usa la familia de funciones exec para ejecutar comandos
+ * 
+ * El programa puede recibir como argumentos N comandos que estén en la siguiente
+ * lista: <ls, du, df> seguidos de un párametro que indica que función exec
+ * hay que usar para lanzar esos comandos. Los parámetros disponobles son:
+ * 
+ * -l:	execl
+ * -lp: eleclp
+ * -v:	execv
+ * -vp:	execvp
+ * 
+ * El progama lanza N hijos(esperando a que acabe cada uno) y sustituye la 
+ * imagen del proceso de estos usando las funciones exec.
+ * 
+ * @author Lucia Fuentes
+ * @author Mihai Blidaru
+ * 
+ * @date 26/02/2018
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
 
+
+/**
+ * Enumeración de los tipos de funcion exec que se van a usar en este programa. 
+ * Se usa para evitar hacer 2 veces una comparación de cadenas.
+ */
 typedef enum{
 	EXECL,
 	EXECLP,
@@ -12,18 +39,34 @@ typedef enum{
 }ExecFunction;
 
 
+/**
+ * Función que imprime la ayuda del programa cuando se detecta que no hay 
+ * suficientes argumentos o que alguno es incorrecto.
+ */
+void print_help();
 
+
+/**
+ * Punto de entrada en la aplicación.
+ * Dentro de está funcion se realiza todo el trabajo. 
+ */
 int main (int argc, char*argv[]){
-	int pid;
-	int i;
-	int status; 
-	char *args[4] = {NULL};
-
-	if (argc < 3){
-		exit(-1);
-	}
+	pid_t pid;
+	int i, status;
 	ExecFunction fun = -1;
+	char *arguments[2] = {NULL};
+	char* ls_path = "/bin/ls";
+	char* df_path = "/bin/df";
+	char* du_path = "/usr/bin/du";
 	
+	if (argc < 3){
+		print_help();
+		exit(EXIT_FAILURE);
+	}
+	
+	
+	/* Comprobar que el ultimo argumento es el correcto. Si no lo es
+	se le muestra un mensaje de error al usuario y se sale del programa.*/
 	if(!strcmp(argv[argc-1], "-l")){
 		fun = EXECL;	
 	} else if(!strcmp(argv[argc-1], "-lp")){
@@ -32,34 +75,57 @@ int main (int argc, char*argv[]){
 		fun = EXECV;
 	} else if(!strcmp(argv[argc-1], "-vp")){
 		fun = EXECVP;
-	}else{
-		printf("Especifica la funcion que quieres usar\n");
+	} else{
+		print_help();
 		exit(EXIT_FAILURE);
 	}
 
-	for (i = 1; i <= argc; i++){
+	for (i = 1; i < argc-1; i++){
+		
+		/* Comprobar que los comandos introducidos están dentro de los 3 
+		soportados y preparar los argumentos para las funciones execl.
+		Si uno de los comando introducidos no está en la lista, se ignora y se 
+		pasa al siguente */
+		if(!strcmp(argv[i], "ls")){
+			arguments[0] = (fun == EXECL || fun == EXECV) ? ls_path:argv[i];	
+		}else if(!strcmp(argv[i], "du")){
+			arguments[0] = (fun == EXECL || fun == EXECV) ? du_path:argv[i];	
+		}else if(!strcmp(argv[i], "df")){
+			arguments[0] = (fun == EXECL || fun == EXECV) ? df_path:argv[i];	
+		}else{
+			printf("\nEl comando \"%s\" no está soportado.\n", argv[i]);
+			printf("No se va a lanzar un proceso hijo. Continuando\n\n");
+			continue;
+		}
+		
 		if((pid = fork()) < 0){
+			fprintf(stderr, "Error en el fork.\n");
 			exit(EXIT_FAILURE);
 		}else if(pid == 0){
 			switch(fun){
 				case EXECL:
-					execl(argv[i],argv[i], (char*)NULL); break;
+					execl(arguments[0], arguments[0], (char*)NULL); break;
 				
 				case EXECLP:
-					execlp(argv[i],argv[i], (char*)NULL); break;
+					execlp(arguments[0], arguments[0], (char*)NULL); break;
 				
 				case EXECV:
-					args[0] = argv[i];
-					execv(argv[i], args); break;
+					execv(arguments[0], arguments); break;
 					
 				case EXECVP:
-					args[0] = argv[i];
-					execvp(argv[i], args);
-					
-				}
-			} else{
+					execvp(arguments[0], arguments);
+			}
+		}else{ 
+			/*Espera a que el proceso hijo acabe antes de llamar al siguente*/
 			waitpid(pid, &status, 0);
 		}
 	}
+	
 	exit(EXIT_SUCCESS);
+}
+
+void print_help(){
+	printf("Tienes que usar una de estas funciones:\n\n");
+	printf("\t-l: execl\n\t-lp: eleclp\n\t-v: execv\n\t-vp: execvp\n");
+	printf("\nEjemplo:\t ./ej6 ls df du -l\n\n\n");
 }
