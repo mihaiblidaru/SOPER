@@ -27,13 +27,16 @@ int fact(int num){
     
     while(num > 1){
         result *= num;
-        num--:
+        num--;
     }
     return result;
 }
 
 int factorial(int num1, int num2){
-    return (num1 >= 0) ? fact(num1))/ num2 : -1;
+    if (num1<0 || num2 <0)
+        return -1;
+        
+    return (fact(num1))/ num2;
 }
 
 int permutacion(int num1, int num2){
