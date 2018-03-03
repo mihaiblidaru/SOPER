@@ -1,18 +1,43 @@
+/**
+ * Ejercicio 12a : Ejercicio que mide el tiempo que tarda un proceso padre
+ * en lanzar 100 hijos y que en cada proceso hijo se calculen los números
+ * primos desde 1 hasta el argumento introducido por teclado
+ * 
+ * @file ejercicio9.c
+ * @author Lucia Fuentes
+ * @author Mihai Blidaru
+ * 
+ * @date 26/02/2018
+ */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <math.h>
 #include <time.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-#include <pthread.h>
 
+/**
+ * Longitud máxima de cadenas
+ */
 #define LENGTH 100
+/**
+ * Numero de hilos
+ */
 #define NUM_HILOS 100
+/**
+ * Constante utilizada para el tipo de dato Boolean
+ */
 #define TRUE 1
+/**
+ * Constante utilizada para el tipo de dato Boolean
+ */
 #define FALSE 0
 
+/**
+ * Estructura pedida por el enunciado que almacena una cadena y el tiempo total
+ * de ejecución
+ */
 typedef struct{
     char cadena[LENGTH+1];
     int tiempo_total;

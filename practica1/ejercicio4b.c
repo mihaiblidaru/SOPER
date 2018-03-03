@@ -1,26 +1,31 @@
 /**
- * Ejercicio 5, apartado B
+ * Ejercicio 4b
+ * Programa que lanza un hijo e imprime el pid del proceso padre.
  * 
- * Un único proceso padre da lugar a un conjunto de procesos hijo para i % 2 != 0. 
- * El proceso padre ha de esperar a que termine la ejecución de todos sus 
- * procesos hijo.
- *
+ * 
  * @author Lucia Fuentes
  * @author Mihai Blidaru
- * @date 20/02/2018
+ * @date 19/02/2018
+ * 
  */
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/wait.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
+
+/**
+ * Limita el número de procesos que se generan.
+ */
 #define NUM_PROC 6
 
+
+/**
+ * Punto de entrada en el programa
+ */
 int main (void){
     int pid;
     int i;
-    int status;
     
     for (i=0; i <= NUM_PROC; i++){
         if (i % 2 != 0) {
@@ -28,15 +33,13 @@ int main (void){
                 printf("Error haciendo fork\n");
                 exit(EXIT_FAILURE);
             }else if (pid == 0){
-                printf("HIJO %d\n", getpid());   
-                break;
+                printf("Soy hijo, mi PID = %d\t PID del padre = %d\n", getpid(), getppid());   
             }else{
-            	printf ("PADRE %d\n", getpid());  
-            	waitpid(pid,  &status, WUNTRACED);
+            	printf ("Soy padre, mi PID = %d\t PID del ultimo hijo creado = %d\n", getpid(), pid);  
             }
         }
     }
-
-
+    
+    wait(NULL);
     exit(EXIT_SUCCESS);
 }

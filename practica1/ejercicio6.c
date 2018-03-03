@@ -1,23 +1,43 @@
+/**
+ * Ejercicio 6
+ * 
+ * Ejercicio que comprueba si un proceso padre tiene acceso a la memoria del 
+ * proceso hijo.
+ * 
+ * @author Lucia Fuentes
+ * @author Mihai Blidaru
+ * @file ejercicio6.c
+ */ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <string.h>
 
+/**
+ * Longitud máxima de la cadena
+ */
 #define LENGTH 80
 
-
+/**
+ * Contiene una cadena para comprobar si se comparte la memoria.
+ */
 typedef struct{
-        char cadena[LENGTH+1];
-        int numero;
+    /*@{*/
+    char cadena[LENGTH+1]; /**<cadena que contiene los datos */
+    int numero; /**<numero */
+    /*@{*/
 } Estructura;
 
 
+/**
+ * Punto de entrada en el programa
+ */
 int main (void){
     int pid;
     int status;
 
-    Estructura* e = (Estructura*) calloc (1, sizeof(Estructura));
+    Estructura* e = calloc (1, sizeof(Estructura));
     if (!e){
         exit(EXIT_FAILURE);
     }
@@ -32,14 +52,14 @@ int main (void){
         printf ("Inserte un nombre por teclado: ");
         fgets(e->cadena, LENGTH, stdin);
     
-        printf("HIJO: Cadena = %s\n", e->cadena);
+        printf("[HIJO] Cadena = %s\n", e->cadena);
         
         free(e);
 
     }else{  //Codigo que ejecuta el padre
     
         waitpid(pid, &status, WUNTRACED);
-        printf("PADRE: Cadena = %s\n", e->cadena);
+        printf("[PADRE] Cadena = %s\n", e->cadena);
         free(e);
     }
 
