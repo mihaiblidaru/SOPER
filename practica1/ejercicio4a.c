@@ -32,11 +32,15 @@ int main (void){
             if ((pid=fork()) < 0){
                 printf("Error al emplear fork\n");
                 exit(EXIT_FAILURE);
+            
+                
             }else if (pid ==0){
                 /* Cada hijo imprime su pid y el pid de su padre */
                 printf("Soy hijo, mi PID = %d\t PID del padre = %d\n", getpid(), getppid());     
+            
             }else{
                 printf ("Soy padre, mi PID = %d\t PID del ultimo hijo creado = %d\n", getpid(), pid); 
+                
             }
         }
     }

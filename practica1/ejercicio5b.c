@@ -4,7 +4,7 @@
  * 
  * Un único proceso padre da lugar a un conjunto de procesos hijo para i % 2 != 0. 
  * El proceso padre ha de esperar a que termine la ejecución de todos sus 
- * procesos hijo.
+ * procesos hijo. El padre es el unico que crea procesos hijos.
  *
  * @author Lucia Fuentes
  * @author Mihai Blidaru
@@ -28,19 +28,20 @@
 int main (void){
     int pid;
     int i;
-    int status;
     
     for (i=0; i <= NUM_PROC; i++){
         if (i % 2 != 0) {
             if ((pid=fork()) <0 ){
                 printf("Error haciendo fork\n");
                 exit(EXIT_FAILURE);
+                
             }else if (pid == 0){
                  printf("Soy hijo, mi PID = %d\t PID del padre = %d\n", getpid(), getppid());    
-                 break;
+                 break; //Ej hijo imprime su información y sale
+                 
             }else{
             	printf ("Soy padre, mi PID = %d\t PID del ultimo hijo creado = %d\n", getpid(), pid);  
-            	waitpid(pid,  &status, WUNTRACED);
+            	wait(NULL); //Espera al hijo creados
             }
         }
     }

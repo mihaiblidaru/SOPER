@@ -22,14 +22,17 @@
  * Longitud máxima de cadenas
  */
 #define LENGTH 100
+
 /**
  * Numero de hilos
  */
 #define NUM_HILOS 100
+
 /**
  * Constante utilizada para el tipo de dato Boolean
  */
 #define TRUE 1
+
 /**
  * Constante utilizada para el tipo de dato Boolean
  */
@@ -41,8 +44,8 @@
  */
 typedef struct{
     char cadena[LENGTH+1];  /**< Cadena de caracteres requerida */
-    int tiempo_total;  /**< Almacena el tiempo total de ejecución*/
-} Tiempos;
+    int num;  /**< Almacena el tiempo total de ejecución*/
+} Estructura;
 
 
 /**
@@ -50,33 +53,14 @@ typedef struct{
  * @param n Número que se quiere comprobar que es primo.
  * @return FALSE si el número no es primo o < 2. TRUE si el número es primo
  */
-int esPrimo(int n){
-    int i, raiz = (int)sqrt(n);
-    if (n==2)
-        return TRUE;
-        
-    for(i = 2; i <= raiz; i++){
-        if (n % i == 0){
-            return FALSE;
-        }
-    }
-    return TRUE;
-}
+int esPrimo(int n);
+
 
 /**
  * Calcula el número de primos desde 1 hasta limit
  * @param limit Número límite hasta el cual se calculan los números primos
  */
-void *calcular_primos(void* limit){
-    int i, n_primos = 0;
-    int final = *(int*)limit;
-    for(i=0; i < final; i++){
-        if(esPrimo(i)){
-            n_primos++;
-        }
-    }
-    pthread_exit(NULL);
-}
+void *calcular_primos(void* limit);
 
 /**
  * Punto de entrada a la aplicacion
@@ -88,6 +72,7 @@ int main(int argc, char**argv){
     clock_t tiempo1, tiempo2;
     int z, limite;
     float tiempo_total;
+    Estructura *e = NULL;
     
     if(argc != 2){
         printf ("Numero invalido de argumentos: se espera INT\n");
@@ -101,30 +86,67 @@ int main(int argc, char**argv){
         return(EXIT_FAILURE);
     }
     
-    Tiempos * t = (Tiempos*) malloc (sizeof(Tiempos));
     
-    if (!t){
+    if (!(e = malloc (sizeof(Estructura)))){
         printf ("Error\n");
         return (EXIT_FAILURE);
     }
     
+    e->num = limite;
+    
     tiempo1 = clock();
+    
     for(z=0; z<NUM_HILOS; z++){
-        
-        pthread_create(&hilos[z], NULL, calcular_primos, &limite);
+        pthread_create(&hilos[z], NULL, calcular_primos, e);
         pthread_join(hilos[z], NULL);
     }
     
     tiempo2 = clock();
     
-    /*for(z=0; z < NUM_HILOS; z++){
-        pthread_join(hilos[z], NULL);
-    */
-    
     tiempo_total = (float)((tiempo2 - tiempo1) / (CLOCKS_PER_SEC/1000.0));
     
     printf("Tiempo total para crear %d hilos: %f ms\n", NUM_HILOS, tiempo_total);
     
-    free(t);
+    free(e);
     exit(EXIT_SUCCESS);
+}
+
+
+/**
+ * Comprueba que un número n es primo.
+ * @param n Número que se quiere comprobar que es primo.
+ * @return FALSE si el número no es primo o < 2. TRUE si el número es primo
+ */
+int esPrimo(int n){
+    int i, raiz = (int)sqrt(n);
+    if(n < 2){
+        return FALSE;    
+    }
+    if (n==2)
+        return TRUE;
+        
+    for(i = 2; i <= raiz; i++){
+        if (n % i == 0){
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+
+/**
+ * Calcula el número de primos desde 1 hasta limit
+ * @param limit Número límite hasta el cual se calculan los números primos
+ */
+void *calcular_primos(void* e){
+    Estructura* args = (Estructura*)e;
+    int i, n_primos;
+    int final = args->num;
+    
+    for(i=0; i < final; i++){
+        if(esPrimo(i)){
+            n_primos++;
+        }
+    }
+    pthread_exit(NULL);
 }

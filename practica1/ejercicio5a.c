@@ -17,10 +17,12 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+
 /**
  * Limita el número de procesos que se generan.
  */
 #define NUM_PROC 6
+
 
 /**
  * Punto de entrada en el programa
@@ -36,8 +38,8 @@ int main (void){
                 printf("Error haciendo fork\n");
                 exit(EXIT_FAILURE);
             }else if (pid == 0){
-                printf("[HIJO] PID = %d -----> [PADRE] PID = %d\n", getpid(), getppid());
-            }else{
+                printf("[HIJO] PID = %d -----> [PADRE] PPID = %d\n", getpid(), getppid());
+                }else{
                 printf ("[PADRE] PID = %d ----> [HIJO CREADO] = %d\n", getpid(), pid);  
             	wait(NULL);
             	break; //Cuando el unico hijo acaba se sale del bucle para no crear otros procesos

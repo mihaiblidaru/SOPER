@@ -20,6 +20,7 @@
  * @date 26/02/2018
  */
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -53,7 +54,7 @@ void print_help();
  */
 int main (int argc, char*argv[]){
 	pid_t pid;
-	int i, status;
+	int i;
 	ExecFunction fun = -1;
 	char *arguments[2] = {NULL};
 	char* ls_path = "/bin/ls";
@@ -86,7 +87,8 @@ int main (int argc, char*argv[]){
 		/* Comprobar que los comandos introducidos están dentro de los 3 
 		soportados y preparar los argumentos para las funciones execl.
 		Si uno de los comando introducidos no está en la lista, se ignora y se 
-		pasa al siguente */
+		pasa al siguente. Si se usan las funciones EXECL o EXECV se preparan los
+		argumentos */
 		if(!strcmp(argv[i], "ls")){
 			arguments[0] = (fun == EXECL || fun == EXECV) ? ls_path:argv[i];	
 		}else if(!strcmp(argv[i], "du")){
@@ -118,7 +120,7 @@ int main (int argc, char*argv[]){
 			}
 		}else{ 
 			/*Espera a que el proceso hijo acabe antes de llamar al siguente*/
-			waitpid(pid, &status, 0);
+			wait(NULL);
 		}
 	}
 	

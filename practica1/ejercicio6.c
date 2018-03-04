@@ -36,7 +36,6 @@ typedef struct{
  */
 int main (void){
     int pid;
-    int status;
 
     Estructura* e = calloc (1, sizeof(Estructura));
     if (!e){
@@ -59,7 +58,7 @@ int main (void){
 
     }else{  //Codigo que ejecuta el padre
     
-        waitpid(pid, &status, WUNTRACED);
+        wait(NULL);
         printf("[PADRE] Cadena = %s\n", e->cadena);
         free(e);
     }

@@ -44,11 +44,21 @@
  */
 typedef struct{
     char cadena[LENGTH+1]; /**< Cadena de caracteres requerida */
-    int tiempo_total;  /**< Almacena el tiempo total de ejecución*/
-} Tiempos;
+    int num;  /**< Número requerido */
+} Estructura;
 
-
+/**
+ * Comprueba que un número n es primo.
+ * @param n Número que se quiere comprobar que es primo.
+ * @return FALSE si el número no es primo o < 2. TRUE si el número es primo
+ */
 int esPrimo(int n);
+
+
+/**
+ * Calcula el número de primos desde 1 hasta limit
+ * @param limit Número límite hasta el cual se calculan los números primos
+ */
 int calcular_primos(int limit);
 
 /**
@@ -58,12 +68,12 @@ int calcular_primos(int limit);
  */
 int main(int argc, char**argv){
     clock_t tiempo1, tiempo2;
-    int i, pid, status;
-    int limite;
-    int tiempo_total;
-    Tiempos * t = (Tiempos*) malloc (sizeof(Tiempos));
+    pid_t pid; 
+    int i, limite;
+    float tiempo_total;
+    Estructura *e = NULL;
     
-    if (!t){
+    if (!(e= malloc (sizeof(Estructura)))){
         printf ("Error\n");
         return (EXIT_FAILURE);
     }
@@ -80,7 +90,6 @@ int main(int argc, char**argv){
         return(EXIT_FAILURE);
     }
     
-    
     tiempo1 = clock();
     for(i=0; i < NUM_HIJOS; i++){
         if ((pid = fork())<0){
@@ -90,18 +99,15 @@ int main(int argc, char**argv){
             calcular_primos(limite);
             exit(EXIT_SUCCESS);
         } else{
-            waitpid(pid, &status, 0);
-            //sprintf(t->cadena[z], "%d", status);
-            
+            wait(NULL);
         }
     }
     
     tiempo2 = clock();
-    t->tiempo_total = (int)((tiempo2 - tiempo1) / (CLOCKS_PER_SEC * 100000));
-    tiempo_total = (int)((tiempo2 - tiempo1) / (int)(CLOCKS_PER_SEC/1000.0));
-    printf("%d %d\n",(int)tiempo2, (int)tiempo1);
     
-    printf("Tiempo total para crear %d procesos hijos: %d ms\n", NUM_HIJOS, tiempo_total);
+    tiempo_total = (int)((tiempo2 - tiempo1) / (int) (CLOCKS_PER_SEC/1000.0));
+    
+    printf("Tiempo total para crear %d hijos: %f ms\n", NUM_HIJOS, tiempo_total);
     
     return(EXIT_SUCCESS);
    
@@ -114,10 +120,10 @@ int main(int argc, char**argv){
  * @return FALSE si el número no es primo o < 2. TRUE si el número es primo
  */
 int esPrimo(int n){
-    if(n < 2){
-        return FALSE;
-    }
     int i, raiz = (int)sqrt(n);
+    if(n < 2){
+        return FALSE;    
+    }
     if (n==2)
         return TRUE;
         
@@ -128,6 +134,7 @@ int esPrimo(int n){
     }
     return TRUE;
 }
+
 
 
 /**

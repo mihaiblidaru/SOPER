@@ -10,6 +10,8 @@ CC = gcc
 EXE = ejercicio4a ejercicio4b ejercicio5a ejercicio5b ejercicio6 ejercicio8 ejercicio9  ejercicio12a ejercicio12b ejercicio13
 FLAGS = -Wall -g 
 
+$(mkdir doc)
+
 all: $(EXE)
 
 ejercicio4a: ejercicio4a.c
@@ -34,7 +36,7 @@ ejercicio9: ejercicio9.c
 	$(CC) $(FLAGS) $< -o $@ -lm
 
 ejercicio12a: ejercicio12a.c
-	$(CC) $(FLAGS) $< -o $@ -pthread -lm
+	$(CC) $(FLAGS) $< -o $@ -lm
 	
 ejercicio12b: ejercicio12b.c
 	$(CC) $(FLAGS) $< -o $@ -pthread -lm
@@ -49,4 +51,5 @@ clean:
 	rm -r -f doc/
 	
 doxygen:
+	mkdir doc
 	doxygen Doxyfile
