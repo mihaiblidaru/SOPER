@@ -38,34 +38,13 @@ typedef struct{
 }ThreadArgs;
 
 
+
 /**
  * Función que va a utilizar un hilo para multiplicar una matriz por un número
  * @param args Puntero a una estructura que contiene toda la información 
  * necesaria para que se realice la multiplicación de matrices.
  */
-void* MultiplicarMatriz(void *args){
-    ThreadArgs *argumentos = (ThreadArgs*)args;
-    char aux[LENGTH]= "";
-    int i, j;
-    for(i=0; i < argumentos->dim; i++){
-        
-        sprintf (aux, "Hilo %d multiplicando fila %d resultado ", argumentos->num_hilo, i);
-        for(j=0; j<argumentos->dim; j++){
-            argumentos->matriz[i][j] *= argumentos->mul;
-            sprintf(aux, "%s %d ", aux, argumentos->matriz[i][j]);
-        }
-        
-        *(argumentos->progreso_propio) += 1;
-        
-        if(*argumentos->progreso_hermano >= argumentos->dim){
-            printf("%s - el Hilo %d ha terminado\n", aux, argumentos->num_hilo == 1 ? 2:1);
-        }else{
-            printf ("%s - el Hilo %d va por la fila %d\n",aux, argumentos->num_hilo == 1 ? 2:1, *argumentos->progreso_hermano);    
-        }
-        usleep (1000000); 
-    }
-    pthread_exit(NULL);
-}
+void* MultiplicarMatriz(void *args);
 
 
 /**
@@ -73,23 +52,7 @@ void* MultiplicarMatriz(void *args){
  * @param dim Dimensión de la matriz cuadrada
  * @return El puntero a la nueva matriz creada o NULL si se produce algun error en el proceso
  */
-int **reservar_matriz_cuadrada(int dim){
-    int** mat = NULL;
-    int i;
-    if(!(mat = malloc(dim * sizeof(int*)))){
-        return NULL;
-    }
-    
-    if(!(mat[0] = malloc(dim * dim * sizeof(int)))){
-        free(mat);
-        return NULL;
-    }
-    
-    for(i=1; i < dim; i++){
-        mat[i] = &mat[0][dim *i];
-    }
-    return mat;
-}
+int **reservar_matriz_cuadrada(int dim);
 
 
 /**
@@ -97,12 +60,7 @@ int **reservar_matriz_cuadrada(int dim){
  * inicializada con la función reservar_matriz_cuadrada
  * @param mat Matriz que se quiere liberar
  */
-void liberar_matriz_cuadrada(int** mat){
-    if(mat){
-        free(mat[0]);
-        free(mat);
-    }
-}
+void liberar_matriz_cuadrada(int** mat);
 
 
 /**
@@ -186,4 +144,71 @@ int main(int argc, char**argv){
     liberar_matriz_cuadrada(mat2);
     
     exit(EXIT_SUCCESS);
+}
+
+
+/**
+ * Función que va a utilizar un hilo para multiplicar una matriz por un número
+ * @param args Puntero a una estructura que contiene toda la información 
+ * necesaria para que se realice la multiplicación de matrices.
+ */
+void* MultiplicarMatriz(void *args){
+    ThreadArgs *argumentos = (ThreadArgs*)args;
+    char aux[LENGTH]= "";
+    int i, j;
+    for(i=0; i < argumentos->dim; i++){
+        
+        sprintf (aux, "Hilo %d multiplicando fila %d resultado ", argumentos->num_hilo, i);
+        for(j=0; j<argumentos->dim; j++){
+            argumentos->matriz[i][j] *= argumentos->mul;
+            sprintf(aux, "%s %d ", aux, argumentos->matriz[i][j]);
+        }
+        
+        *(argumentos->progreso_propio) += 1;
+        
+        if(*argumentos->progreso_hermano >= argumentos->dim){
+            printf("%s - el Hilo %d ha terminado\n", aux, argumentos->num_hilo == 1 ? 2:1);
+        }else{
+            printf ("%s - el Hilo %d va por la fila %d\n",aux, argumentos->num_hilo == 1 ? 2:1, *argumentos->progreso_hermano);    
+        }
+        usleep (1000000); 
+    }
+    pthread_exit(NULL);
+}
+
+
+/**
+ * Reserva memoria para una matriz cuadrada
+ * @param dim Dimensión de la matriz cuadrada
+ * @return El puntero a la nueva matriz creada o NULL si se produce algun error en el proceso
+ */
+int **reservar_matriz_cuadrada(int dim){
+    int** mat = NULL;
+    int i;
+    if(!(mat = malloc(dim * sizeof(int*)))){
+        return NULL;
+    }
+    
+    if(!(mat[0] = malloc(dim * dim * sizeof(int)))){
+        free(mat);
+        return NULL;
+    }
+    
+    for(i=1; i < dim; i++){
+        mat[i] = &mat[0][dim *i];
+    }
+    return mat;
+}
+
+
+/**
+ * Libera la memoria usada por una matriz cuadrada
+ * inicializada con la función reservar_matriz_cuadrada
+ * @param mat Matriz que se quiere liberar
+ */
+void liberar_matriz_cuadrada(int** mat){
+    if(mat){
+        free(mat[0]);
+        free(mat);
+    }
 }
