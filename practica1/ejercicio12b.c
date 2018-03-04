@@ -3,7 +3,7 @@
  * en lanzar 100 hijos y que en cada proceso hijo se calculen los números
  * primos desde 1 hasta el argumento introducido por teclado
  * 
- * @file ejercicio9.c
+ * @file ejercicio12b.c
  * @author Lucia Fuentes
  * @author Mihai Blidaru
  * 
@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+#include <pthread.h>
 #include <time.h>
 #include <sys/wait.h>
 #include <sys/types.h>
@@ -39,10 +40,16 @@
  * de ejecución
  */
 typedef struct{
-    char cadena[LENGTH+1];
-    int tiempo_total;
+    char cadena[LENGTH+1];  /**< Cadena de caracteres requerida */
+    int tiempo_total;  /**< Almacena el tiempo total de ejecución*/
 } Tiempos;
 
+
+/**
+ * Comprueba que un número n es primo.
+ * @param n Número que se quiere comprobar que es primo.
+ * @return FALSE si el número no es primo o < 2. TRUE si el número es primo
+ */
 int esPrimo(int n){
     int i, raiz = (int)sqrt(n);
     if (n==2)
@@ -56,6 +63,10 @@ int esPrimo(int n){
     return TRUE;
 }
 
+/**
+ * Calcula el número de primos desde 1 hasta limit
+ * @param limit Número límite hasta el cual se calculan los números primos
+ */
 void *calcular_primos(void* limit){
     int i, n_primos = 0;
     int final = *(int*)limit;
@@ -67,7 +78,11 @@ void *calcular_primos(void* limit){
     pthread_exit(NULL);
 }
 
-
+/**
+ * Punto de entrada a la aplicacion
+ * @param argc Número de parametros del programa
+ * @param argv Lista de los argumentos del programa
+ */
 int main(int argc, char**argv){
     pthread_t hilos[NUM_HILOS];
     clock_t tiempo1, tiempo2;

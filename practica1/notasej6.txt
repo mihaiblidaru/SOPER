@@ -6,7 +6,6 @@ Como los dos procesos no comparten la misma memoria, hay que liberar memoria en
 los dos procesos, tal como se puede observar usando valgrind:
 
 
-
 /* FREE SOLO EN EL PADRE */
 
 mihai314:~/workspace/practica1 (master) $ valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./ej6

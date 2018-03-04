@@ -13,6 +13,7 @@
  * El progama lanza N hijos(esperando a que acabe cada uno) y sustituye la 
  * imagen del proceso de estos usando las funciones exec.
  * 
+ * @file ejercicio8.c
  * @author Lucia Fuentes
  * @author Mihai Blidaru
  * 

@@ -6,6 +6,7 @@
  * 
  * Cada proceso espera a que termine su unico hijo.
  * 
+ * @file ejercicio5a.c
  * @author Lucia Fuentes
  * @author Mihai Blidaru
  * @date 19/02/2018
@@ -27,9 +28,9 @@
 int main (void){
     int pid;
     int i;
-    int status;
-    
+
     for (i=0; i <= NUM_PROC; i++){
+        /*Ahora los procesos se crean cuando i es impar */
         if (i % 2 != 0) {
             if ((pid=fork()) < 0 ){
                 printf("Error haciendo fork\n");
@@ -38,8 +39,8 @@ int main (void){
                 printf("[HIJO] PID = %d -----> [PADRE] PID = %d\n", getpid(), getppid());
             }else{
                 printf ("[PADRE] PID = %d ----> [HIJO CREADO] = %d\n", getpid(), pid);  
-            	waitpid(pid,  &status, 0);
-            	break;
+            	wait(NULL);
+            	break; //Cuando el unico hijo acaba se sale del bucle para no crear otros procesos
             }
         }
     }

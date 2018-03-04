@@ -1,23 +1,49 @@
+/**
+ * Ejercicio 13: Programa que utiliza dos hilos de ejecución para multiplicar
+ * dos matrices cuadradas por dos números enteros. Tras cada iteración registra
+ * por qué paso va cada hilo de ejecución.
+ * @file ejercicio13.c
+ * @author Lucia Fuentes
+ * @author Mihai Blidaru
+ * @date 26/02/2018
+ */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <time.h>
 #include <pthread.h>
 
+/**
+ * Dimension máxima de la matriz cuadrada
+ */
 #define MAX_DIM 5
+
+
+/**
+ * Longitud máxima de una cadena
+ */
 #define LENGTH 500
 
+
+/**
+ * Estructura necesaria para pasar varios argumentos a un hilo
+ */
 typedef struct{
-    int dim;
-    int**matriz;
-    int mul;
-    int num_hilo;
-    int* progreso_propio;
-    int* progreso_hermano;
+    int dim;                /**< Dimension de la matriz cuadrada */
+    int**matriz;            /**< La matriz cuadrada */
+    int mul;                /**< Número por el cual se multiplica la matriz */
+    int num_hilo;           /**< Número del hilo */
+    int* progreso_propio;   /**< Ultima fila de la matriz multiplicada del hilo actual */
+    int* progreso_hermano;  /**< Ultima fila de la matriz multiplicada del hilo hermano*/
 }ThreadArgs;
 
-void* SuperFuncion(void *args){
+
+/**
+ * Función que va a utilizar un hilo para multiplicar una matriz por un número
+ * @param args Puntero a una estructura que contiene toda la información 
+ * necesaria para que se realice la multiplicación de matrices.
+ */
+void* MultiplicarMatriz(void *args){
     ThreadArgs *argumentos = (ThreadArgs*)args;
     char aux[LENGTH]= "";
     int i, j;
@@ -41,6 +67,12 @@ void* SuperFuncion(void *args){
     pthread_exit(NULL);
 }
 
+
+/**
+ * Reserva memoria para una matriz cuadrada
+ * @param dim Dimensión de la matriz cuadrada
+ * @return El puntero a la nueva matriz creada o NULL si se produce algun error en el proceso
+ */
 int **reservar_matriz_cuadrada(int dim){
     int** mat = NULL;
     int i;
@@ -49,6 +81,7 @@ int **reservar_matriz_cuadrada(int dim){
     }
     
     if(!(mat[0] = malloc(dim * dim * sizeof(int)))){
+        free(mat);
         return NULL;
     }
     
@@ -58,6 +91,12 @@ int **reservar_matriz_cuadrada(int dim){
     return mat;
 }
 
+
+/**
+ * Libera la memoria usada por una matriz cuadrada
+ * inicializada con la función reservar_matriz_cuadrada
+ * @param mat Matriz que se quiere liberar
+ */
 void liberar_matriz_cuadrada(int** mat){
     if(mat){
         free(mat[0]);
@@ -65,6 +104,12 @@ void liberar_matriz_cuadrada(int** mat){
     }
 }
 
+
+/**
+ * Punto de entrada a la aplicacion
+ * @param argc Número de parametros del programa
+ * @param argv Lista de los argumentos del programa
+ */
 int main(int argc, char**argv){ 
     int dim, mul1, mul2, i, j;
     int **mat1 = NULL, **mat2 = NULL;
@@ -131,8 +176,8 @@ int main(int argc, char**argv){
     argumentos2.progreso_hermano = &progreso1;
 
     
-    pthread_create(&h1, NULL, SuperFuncion, &argumentos1);
-    pthread_create(&h2, NULL, SuperFuncion, &argumentos2);
+    pthread_create(&h1, NULL, MultiplicarMatriz, &argumentos1);
+    pthread_create(&h2, NULL, MultiplicarMatriz, &argumentos2);
     
     pthread_join(h1, NULL);
     pthread_join(h2, NULL);
@@ -142,7 +187,3 @@ int main(int argc, char**argv){
     
     exit(EXIT_SUCCESS);
 }
-
-
-
-

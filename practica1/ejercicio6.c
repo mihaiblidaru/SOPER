@@ -4,6 +4,7 @@
  * Ejercicio que comprueba si un proceso padre tiene acceso a la memoria del 
  * proceso hijo.
  * 
+ * @file ejercicio6.c
  * @author Lucia Fuentes
  * @author Mihai Blidaru
  * @file ejercicio6.c

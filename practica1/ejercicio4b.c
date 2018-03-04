@@ -2,6 +2,7 @@
  * Ejercicio 4b
  * Programa que lanza un hijo e imprime el pid del proceso padre.
  * 
+ * @file ejercicio4b.c
  * 
  * @author Lucia Fuentes
  * @author Mihai Blidaru
@@ -28,7 +29,7 @@ int main (void){
     int i;
     
     for (i=0; i <= NUM_PROC; i++){
-        if (i % 2 != 0) {
+        if (i % 2 == 0) {
             if ((pid=fork()) <0 ){
                 printf("Error haciendo fork\n");
                 exit(EXIT_FAILURE);

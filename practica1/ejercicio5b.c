@@ -1,4 +1,5 @@
 /**
+ * @file ejercicio5b.c
  * Ejercicio 5b
  * 
  * Un único proceso padre da lugar a un conjunto de procesos hijo para i % 2 != 0. 

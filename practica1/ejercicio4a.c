@@ -1,7 +1,8 @@
 /**
- * Ejercicio 4
+ * Ejercicio 4a
  * Programa que lanza un hijo e imprime el pid del proceso padre.
- * 
+ *
+ * @file ejercicio4a.c
  * 
  * @author Lucia Fuentes
  * @author Mihai Blidaru
@@ -18,12 +19,14 @@
  */
 #define NUM_PROC 6
 
+
 /**
  * Punto de entrada en el programa
  */
 int main (void){
     int pid;
     int i;
+    
     for (i=0; i <= NUM_PROC; i++){
         if (i % 2 == 0) {
             if ((pid=fork()) < 0){

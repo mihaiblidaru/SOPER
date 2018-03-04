@@ -3,7 +3,7 @@
  * en lanzar 100 hijos y que en cada proceso hijo se calculen los números
  * primos desde 1 hasta el argumento introducido por teclado
  * 
- * @file ejercicio9.c
+ * @file ejercicio12a.c
  * @author Lucia Fuentes
  * @author Mihai Blidaru
  * 
