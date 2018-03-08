@@ -1,0 +1,131 @@
+\hypertarget{ejercicio12b_8c}{\section{Referencia del Archivo ejercicio12b.\-c}
+\label{ejercicio12b_8c}\index{ejercicio12b.\-c@{ejercicio12b.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include $<$pthread.\-h$>$}\\*
+{\ttfamily \#include $<$time.\-h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+\subsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structEstructura}{Estructura}
+\end{DoxyCompactItemize}
+\subsection*{'defines'}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ejercicio12b_8c_a30362161c93e3f1a4ee4c673f535b5a8}{L\-E\-N\-G\-T\-H}~100
+\item 
+\#define \hyperlink{ejercicio12b_8c_ac07422ff8cd6d473b961d30658414deb}{N\-U\-M\-\_\-\-H\-I\-L\-O\-S}~100
+\item 
+\#define \hyperlink{ejercicio12b_8c_aa8cecfc5c5c054d2875c03e77b7be15d}{T\-R\-U\-E}~1
+\item 
+\#define \hyperlink{ejercicio12b_8c_aa93f0eb578d23995850d61f7d61c55c1}{F\-A\-L\-S\-E}~0
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{ejercicio12b_8c_a537b2d92840101891a855c31daa23593}{es\-Primo} (int n)
+\begin{DoxyCompactList}\small\item\em Comprueba que un número n es primo. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{ejercicio12b_8c_a14d643bc6d1e88405bd2108a17ecda59}{calcular\-\_\-primos} (void $\ast$e)
+\begin{DoxyCompactList}\small\item\em Calcula el número de primos desde 1 hasta limit. \end{DoxyCompactList}\item 
+int \hyperlink{ejercicio12b_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Punto de entrada a la aplicacion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 12a \-: Ejercicio que mide el tiempo que tarda un proceso padre en lanzar 100 hijos y que en cada proceso hijo se calculen los números primos desde 1 hasta el argumento introducido por teclado
+
+\begin{DoxyAuthor}{Autor}
+Lucia Fuentes 
+
+Mihai Blidaru
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+26/02/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los 'defines'}
+\hypertarget{ejercicio12b_8c_aa93f0eb578d23995850d61f7d61c55c1}{\index{ejercicio12b.\-c@{ejercicio12b.\-c}!F\-A\-L\-S\-E@{F\-A\-L\-S\-E}}
+\index{F\-A\-L\-S\-E@{F\-A\-L\-S\-E}!ejercicio12b.c@{ejercicio12b.\-c}}
+\subsubsection[{F\-A\-L\-S\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-A\-L\-S\-E~0}}\label{ejercicio12b_8c_aa93f0eb578d23995850d61f7d61c55c1}
+Constante empleada en un tipo de dato Bool equivalente a falso \hypertarget{ejercicio12b_8c_a30362161c93e3f1a4ee4c673f535b5a8}{\index{ejercicio12b.\-c@{ejercicio12b.\-c}!L\-E\-N\-G\-T\-H@{L\-E\-N\-G\-T\-H}}
+\index{L\-E\-N\-G\-T\-H@{L\-E\-N\-G\-T\-H}!ejercicio12b.c@{ejercicio12b.\-c}}
+\subsubsection[{L\-E\-N\-G\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-N\-G\-T\-H~100}}\label{ejercicio12b_8c_a30362161c93e3f1a4ee4c673f535b5a8}
+Longitud máxima de cadenas \hypertarget{ejercicio12b_8c_ac07422ff8cd6d473b961d30658414deb}{\index{ejercicio12b.\-c@{ejercicio12b.\-c}!N\-U\-M\-\_\-\-H\-I\-L\-O\-S@{N\-U\-M\-\_\-\-H\-I\-L\-O\-S}}
+\index{N\-U\-M\-\_\-\-H\-I\-L\-O\-S@{N\-U\-M\-\_\-\-H\-I\-L\-O\-S}!ejercicio12b.c@{ejercicio12b.\-c}}
+\subsubsection[{N\-U\-M\-\_\-\-H\-I\-L\-O\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-U\-M\-\_\-\-H\-I\-L\-O\-S~100}}\label{ejercicio12b_8c_ac07422ff8cd6d473b961d30658414deb}
+Numero de hilos \hypertarget{ejercicio12b_8c_aa8cecfc5c5c054d2875c03e77b7be15d}{\index{ejercicio12b.\-c@{ejercicio12b.\-c}!T\-R\-U\-E@{T\-R\-U\-E}}
+\index{T\-R\-U\-E@{T\-R\-U\-E}!ejercicio12b.c@{ejercicio12b.\-c}}
+\subsubsection[{T\-R\-U\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-R\-U\-E~1}}\label{ejercicio12b_8c_aa8cecfc5c5c054d2875c03e77b7be15d}
+Constante empleada en un tipo de dato Bool equivalente a verdadero 
+
+\subsection{Documentación de las funciones}
+\hypertarget{ejercicio12b_8c_a14d643bc6d1e88405bd2108a17ecda59}{\index{ejercicio12b.\-c@{ejercicio12b.\-c}!calcular\-\_\-primos@{calcular\-\_\-primos}}
+\index{calcular\-\_\-primos@{calcular\-\_\-primos}!ejercicio12b.c@{ejercicio12b.\-c}}
+\subsubsection[{calcular\-\_\-primos}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ calcular\-\_\-primos (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{e}
+\end{DoxyParamCaption}
+)}}\label{ejercicio12b_8c_a14d643bc6d1e88405bd2108a17ecda59}
+
+
+Calcula el número de primos desde 1 hasta limit. 
+
+Calcula el número de primos desde 1 hasta limit 
+\begin{DoxyParams}{Parámetros}
+{\em e} & \hyperlink{structEstructura}{Estructura} usada para pasarle limites al hilo\\
+\hline
+{\em e} & \hyperlink{structEstructura}{Estructura} usada para pasarle limites al hilo \\
+\hline
+\end{DoxyParams}
+\hypertarget{ejercicio12b_8c_a537b2d92840101891a855c31daa23593}{\index{ejercicio12b.\-c@{ejercicio12b.\-c}!es\-Primo@{es\-Primo}}
+\index{es\-Primo@{es\-Primo}!ejercicio12b.c@{ejercicio12b.\-c}}
+\subsubsection[{es\-Primo}]{\setlength{\rightskip}{0pt plus 5cm}int es\-Primo (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{ejercicio12b_8c_a537b2d92840101891a855c31daa23593}
+
+
+Comprueba que un número n es primo. 
+
+Comprueba que un número n es primo. 
+\begin{DoxyParams}{Parámetros}
+{\em n} & Número que se quiere comprobar que es primo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+F\-A\-L\-S\-E si el número no es primo o $<$ 2. T\-R\-U\-E si el número es primo
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parámetros}
+{\em n} & Número que se quiere comprobar que es primo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+F\-A\-L\-S\-E si el número no es primo o $<$ 2. T\-R\-U\-E si el número es primo 
+\end{DoxyReturn}
+\hypertarget{ejercicio12b_8c_a3c04138a5bfe5d72780bb7e82a18e627}{\index{ejercicio12b.\-c@{ejercicio12b.\-c}!main@{main}}
+\index{main@{main}!ejercicio12b.c@{ejercicio12b.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{ejercicio12b_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+Punto de entrada a la aplicacion. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em argc} & Número de parametros del programa \\
+\hline
+{\em argv} & Lista de los argumentos del programa \\
+\hline
+\end{DoxyParams}

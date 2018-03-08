@@ -42,14 +42,14 @@ typedef enum{
 
 
 /**
- * Función que imprime la ayuda del programa cuando se detecta que no hay 
+ * @brief Función que imprime la ayuda del programa cuando se detecta que no hay 
  * suficientes argumentos o que alguno es incorrecto.
  */
 void print_help();
 
 
 /**
- * Punto de entrada en la aplicación.
+ * @brief Punto de entrada en la aplicación.
  * Dentro de está funcion se realiza todo el trabajo. 
  */
 int main (int argc, char*argv[]){
@@ -107,7 +107,8 @@ int main (int argc, char*argv[]){
 		}else if(pid == 0){
 			switch(fun){
 				case EXECL:
-					execl(arguments[0], arguments[0], (char*)NULL); break;
+						  /bin/ls        /bin/ls
+ 					execl(arguments[0], arguments[0], (char*)NULL); break;
 				
 				case EXECLP:
 					execlp(arguments[0], arguments[0], (char*)NULL); break;
@@ -127,6 +128,11 @@ int main (int argc, char*argv[]){
 	exit(EXIT_SUCCESS);
 }
 
+
+/**
+ * @brief Función que imprime la ayuda del programa cuando se detecta que no hay 
+ * suficientes argumentos o que alguno es incorrecto.
+ */
 void print_help(){
 	printf("Tienes que usar una de estas funciones:\n\n");
 	printf("\t-l: execl\n\t-lp: eleclp\n\t-v: execv\n\t-vp: execvp\n");

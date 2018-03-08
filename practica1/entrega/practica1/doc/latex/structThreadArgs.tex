@@ -1,0 +1,47 @@
+\hypertarget{structThreadArgs}{\section{Referencia de la Estructura Thread\-Args}
+\label{structThreadArgs}\index{Thread\-Args@{Thread\-Args}}
+}
+\subsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{structThreadArgs_aa8b404d63d12ecf9fe2e7931a6e3402a}{dim}
+\item 
+int $\ast$$\ast$ \hyperlink{structThreadArgs_af325a287ef529e08ac2f1cb0f223b696}{matriz}
+\item 
+int \hyperlink{structThreadArgs_a1bf04327201dd153e50895ea1b8e9ca0}{mul}
+\item 
+int \hyperlink{structThreadArgs_a63a99447b50d466b77759dbe635af785}{num\-\_\-hilo}
+\item 
+int $\ast$ \hyperlink{structThreadArgs_a2a69690c663d2d50d808de734f46a67d}{progreso\-\_\-propio}
+\item 
+int $\ast$ \hyperlink{structThreadArgs_adb9645ac234d5278d06c1450af517fad}{progreso\-\_\-hermano}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+\hyperlink{structEstructura}{Estructura} necesaria para pasar varios argumentos a un hilo 
+
+\subsection{Documentación de los campos}
+\hypertarget{structThreadArgs_aa8b404d63d12ecf9fe2e7931a6e3402a}{\index{Thread\-Args@{Thread\-Args}!dim@{dim}}
+\index{dim@{dim}!ThreadArgs@{Thread\-Args}}
+\subsubsection[{dim}]{\setlength{\rightskip}{0pt plus 5cm}int Thread\-Args\-::dim}}\label{structThreadArgs_aa8b404d63d12ecf9fe2e7931a6e3402a}
+Dimension de la matriz cuadrada \hypertarget{structThreadArgs_af325a287ef529e08ac2f1cb0f223b696}{\index{Thread\-Args@{Thread\-Args}!matriz@{matriz}}
+\index{matriz@{matriz}!ThreadArgs@{Thread\-Args}}
+\subsubsection[{matriz}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$$\ast$ Thread\-Args\-::matriz}}\label{structThreadArgs_af325a287ef529e08ac2f1cb0f223b696}
+La matriz cuadrada \hypertarget{structThreadArgs_a1bf04327201dd153e50895ea1b8e9ca0}{\index{Thread\-Args@{Thread\-Args}!mul@{mul}}
+\index{mul@{mul}!ThreadArgs@{Thread\-Args}}
+\subsubsection[{mul}]{\setlength{\rightskip}{0pt plus 5cm}int Thread\-Args\-::mul}}\label{structThreadArgs_a1bf04327201dd153e50895ea1b8e9ca0}
+Número por el cual se multiplica la matriz \hypertarget{structThreadArgs_a63a99447b50d466b77759dbe635af785}{\index{Thread\-Args@{Thread\-Args}!num\-\_\-hilo@{num\-\_\-hilo}}
+\index{num\-\_\-hilo@{num\-\_\-hilo}!ThreadArgs@{Thread\-Args}}
+\subsubsection[{num\-\_\-hilo}]{\setlength{\rightskip}{0pt plus 5cm}int Thread\-Args\-::num\-\_\-hilo}}\label{structThreadArgs_a63a99447b50d466b77759dbe635af785}
+Número del hilo \hypertarget{structThreadArgs_adb9645ac234d5278d06c1450af517fad}{\index{Thread\-Args@{Thread\-Args}!progreso\-\_\-hermano@{progreso\-\_\-hermano}}
+\index{progreso\-\_\-hermano@{progreso\-\_\-hermano}!ThreadArgs@{Thread\-Args}}
+\subsubsection[{progreso\-\_\-hermano}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ Thread\-Args\-::progreso\-\_\-hermano}}\label{structThreadArgs_adb9645ac234d5278d06c1450af517fad}
+Ultima fila de la matriz multiplicada del hilo hermano \hypertarget{structThreadArgs_a2a69690c663d2d50d808de734f46a67d}{\index{Thread\-Args@{Thread\-Args}!progreso\-\_\-propio@{progreso\-\_\-propio}}
+\index{progreso\-\_\-propio@{progreso\-\_\-propio}!ThreadArgs@{Thread\-Args}}
+\subsubsection[{progreso\-\_\-propio}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ Thread\-Args\-::progreso\-\_\-propio}}\label{structThreadArgs_a2a69690c663d2d50d808de734f46a67d}
+Ultima fila de la matriz multiplicada del hilo actual 
+
+La documentación para esta estructura fue generada a partir del siguiente fichero\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ejercicio13_8c}{ejercicio13.\-c}\end{DoxyCompactItemize}

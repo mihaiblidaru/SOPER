@@ -1,0 +1,53 @@
+\hypertarget{ejercicio8_8c}{\section{Referencia del Archivo ejercicio8.\-c}
+\label{ejercicio8_8c}\index{ejercicio8.\-c@{ejercicio8.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$sys/wait.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+\subsection*{Enumeraciones}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{ejercicio8_8c_ae3c2df2f4883693b43be50ffed10395c}{Exec\-Function} \{ {\bfseries E\-X\-E\-C\-L}, 
+{\bfseries E\-X\-E\-C\-L\-P}, 
+{\bfseries E\-X\-E\-C\-V}, 
+{\bfseries E\-X\-E\-C\-V\-P}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{ejercicio8_8c_a853216ac51aa181669ff4d3de74058a7}{void \hyperlink{ejercicio8_8c_a853216ac51aa181669ff4d3de74058a7}{print\-\_\-help} ()}\label{ejercicio8_8c_a853216ac51aa181669ff4d3de74058a7}
+
+\begin{DoxyCompactList}\small\item\em Función que imprime la ayuda del programa cuando se detecta que no hay suficientes argumentos o que alguno es incorrecto. \end{DoxyCompactList}\item 
+\hypertarget{ejercicio8_8c_a0ddf1224851353fc92bfbff6f499fa97}{int \hyperlink{ejercicio8_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})}\label{ejercicio8_8c_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCompactList}\small\item\em Punto de entrada en la aplicación. Dentro de está funcion se realiza todo el trabajo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 8\-: Usa la familia de funciones exec para ejecutar comandos
+
+El programa puede recibir como argumentos N comandos que estén en la siguiente lista\-: $<$ls, du, df$>$ seguidos de un párametro que indica que función exec hay que usar para lanzar esos comandos. Los parámetros disponobles son\-:
+
+-\/l\-: execl -\/lp\-: eleclp -\/v\-: execv -\/vp\-: execvp
+
+El progama lanza N hijos(esperando a que acabe cada uno) y sustituye la imagen del proceso de estos usando las funciones exec.
+
+\begin{DoxyAuthor}{Autor}
+Lucia Fuentes 
+
+Mihai Blidaru
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+26/02/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de las enumeraciones}
+\hypertarget{ejercicio8_8c_ae3c2df2f4883693b43be50ffed10395c}{\index{ejercicio8.\-c@{ejercicio8.\-c}!Exec\-Function@{Exec\-Function}}
+\index{Exec\-Function@{Exec\-Function}!ejercicio8.c@{ejercicio8.\-c}}
+\subsubsection[{Exec\-Function}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Exec\-Function}}}\label{ejercicio8_8c_ae3c2df2f4883693b43be50ffed10395c}
+Enumeración de los tipos de funcion exec que se van a usar en este programa. Se usa para evitar hacer 2 veces una comparación de cadenas. 

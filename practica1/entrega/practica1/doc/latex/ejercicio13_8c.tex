@@ -1,0 +1,134 @@
+\hypertarget{ejercicio13_8c}{\section{Referencia del Archivo ejercicio13.\-c}
+\label{ejercicio13_8c}\index{ejercicio13.\-c@{ejercicio13.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$time.\-h$>$}\\*
+{\ttfamily \#include $<$pthread.\-h$>$}\\*
+\subsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structThreadArgs}{Thread\-Args}
+\end{DoxyCompactItemize}
+\subsection*{'defines'}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ejercicio13_8c_a7ba3949b1f197baf0354d41124bdbe88}{M\-A\-X\-\_\-\-D\-I\-M}~5
+\item 
+\#define \hyperlink{ejercicio13_8c_a30362161c93e3f1a4ee4c673f535b5a8}{L\-E\-N\-G\-T\-H}~500
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{ejercicio13_8c_aa539e3f52559a95dc260627deac909d3}{Multiplicar\-Matriz} (void $\ast$args)
+\begin{DoxyCompactList}\small\item\em Función que va a utilizar un hilo para multiplicar una matriz por un número. \end{DoxyCompactList}\item 
+int $\ast$$\ast$ \hyperlink{ejercicio13_8c_a783b8c4194493a44ad6eac354b01200e}{reservar\-\_\-matriz\-\_\-cuadrada} (int dim)
+\begin{DoxyCompactList}\small\item\em Reserva memoria para una matriz cuadrada. \end{DoxyCompactList}\item 
+void \hyperlink{ejercicio13_8c_a28e90ea99d7d89921ac4a61cdaca1d7e}{liberar\-\_\-matriz\-\_\-cuadrada} (int $\ast$$\ast$mat)
+\begin{DoxyCompactList}\small\item\em Libera la memoria usada por una matriz cuadrada inicializada con la función reservar\-\_\-matriz\-\_\-cuadrada. \end{DoxyCompactList}\item 
+int \hyperlink{ejercicio13_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Punto de entrada a la aplicacion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 13\-: Programa que utiliza dos hilos de ejecución para multiplicar dos matrices cuadradas por dos números enteros. Tras cada iteración registra por qué paso va cada hilo de ejecución.
+
+\begin{DoxyAuthor}{Autor}
+Lucia Fuentes 
+
+Mihai Blidaru 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+26/02/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los 'defines'}
+\hypertarget{ejercicio13_8c_a30362161c93e3f1a4ee4c673f535b5a8}{\index{ejercicio13.\-c@{ejercicio13.\-c}!L\-E\-N\-G\-T\-H@{L\-E\-N\-G\-T\-H}}
+\index{L\-E\-N\-G\-T\-H@{L\-E\-N\-G\-T\-H}!ejercicio13.c@{ejercicio13.\-c}}
+\subsubsection[{L\-E\-N\-G\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-N\-G\-T\-H~500}}\label{ejercicio13_8c_a30362161c93e3f1a4ee4c673f535b5a8}
+Longitud máxima de una cadena \hypertarget{ejercicio13_8c_a7ba3949b1f197baf0354d41124bdbe88}{\index{ejercicio13.\-c@{ejercicio13.\-c}!M\-A\-X\-\_\-\-D\-I\-M@{M\-A\-X\-\_\-\-D\-I\-M}}
+\index{M\-A\-X\-\_\-\-D\-I\-M@{M\-A\-X\-\_\-\-D\-I\-M}!ejercicio13.c@{ejercicio13.\-c}}
+\subsubsection[{M\-A\-X\-\_\-\-D\-I\-M}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-X\-\_\-\-D\-I\-M~5}}\label{ejercicio13_8c_a7ba3949b1f197baf0354d41124bdbe88}
+Dimension máxima de la matriz cuadrada 
+
+\subsection{Documentación de las funciones}
+\hypertarget{ejercicio13_8c_a28e90ea99d7d89921ac4a61cdaca1d7e}{\index{ejercicio13.\-c@{ejercicio13.\-c}!liberar\-\_\-matriz\-\_\-cuadrada@{liberar\-\_\-matriz\-\_\-cuadrada}}
+\index{liberar\-\_\-matriz\-\_\-cuadrada@{liberar\-\_\-matriz\-\_\-cuadrada}!ejercicio13.c@{ejercicio13.\-c}}
+\subsubsection[{liberar\-\_\-matriz\-\_\-cuadrada}]{\setlength{\rightskip}{0pt plus 5cm}void liberar\-\_\-matriz\-\_\-cuadrada (
+\begin{DoxyParamCaption}
+\item[{int $\ast$$\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{ejercicio13_8c_a28e90ea99d7d89921ac4a61cdaca1d7e}
+
+
+Libera la memoria usada por una matriz cuadrada inicializada con la función reservar\-\_\-matriz\-\_\-cuadrada. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em mat} & Matriz que se quiere liberar \\
+\hline
+\end{DoxyParams}
+\hypertarget{ejercicio13_8c_a3c04138a5bfe5d72780bb7e82a18e627}{\index{ejercicio13.\-c@{ejercicio13.\-c}!main@{main}}
+\index{main@{main}!ejercicio13.c@{ejercicio13.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}}\label{ejercicio13_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+Punto de entrada a la aplicacion. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em argc} & Número de parametros del programa \\
+\hline
+{\em argv} & Lista de los argumentos del programa \\
+\hline
+\end{DoxyParams}
+\hypertarget{ejercicio13_8c_aa539e3f52559a95dc260627deac909d3}{\index{ejercicio13.\-c@{ejercicio13.\-c}!Multiplicar\-Matriz@{Multiplicar\-Matriz}}
+\index{Multiplicar\-Matriz@{Multiplicar\-Matriz}!ejercicio13.c@{ejercicio13.\-c}}
+\subsubsection[{Multiplicar\-Matriz}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ Multiplicar\-Matriz (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{args}
+\end{DoxyParamCaption}
+)}}\label{ejercicio13_8c_aa539e3f52559a95dc260627deac909d3}
+
+
+Función que va a utilizar un hilo para multiplicar una matriz por un número. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em args} & Puntero a una estructura que contiene toda la información necesaria para que se realice la multiplicación de matrices. \\
+\hline
+\end{DoxyParams}
+\hypertarget{ejercicio13_8c_a783b8c4194493a44ad6eac354b01200e}{\index{ejercicio13.\-c@{ejercicio13.\-c}!reservar\-\_\-matriz\-\_\-cuadrada@{reservar\-\_\-matriz\-\_\-cuadrada}}
+\index{reservar\-\_\-matriz\-\_\-cuadrada@{reservar\-\_\-matriz\-\_\-cuadrada}!ejercicio13.c@{ejercicio13.\-c}}
+\subsubsection[{reservar\-\_\-matriz\-\_\-cuadrada}]{\setlength{\rightskip}{0pt plus 5cm}int $\ast$$\ast$ reservar\-\_\-matriz\-\_\-cuadrada (
+\begin{DoxyParamCaption}
+\item[{int}]{dim}
+\end{DoxyParamCaption}
+)}}\label{ejercicio13_8c_a783b8c4194493a44ad6eac354b01200e}
+
+
+Reserva memoria para una matriz cuadrada. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em dim} & Dimensión de la matriz cuadrada \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+El puntero a la nueva matriz creada o N\-U\-L\-L si se produce algun error en el proceso
+\end{DoxyReturn}
+La reserva se realiza de forma que todos los datos de la matriz esten contiguos en memoria. 
+\begin{DoxyParams}{Parámetros}
+{\em dim} & Dimensión de la matriz cuadrada \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+El puntero a la nueva matriz creada o N\-U\-L\-L si se produce algun error en el proceso 
+\end{DoxyReturn}
