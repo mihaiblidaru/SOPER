@@ -9,6 +9,6 @@
 
 #include <stdlib.h>
 
-int main(){
-    exit(EXIT_SUCCESS);    
+int func(){
+    return 0xCACA;
 }

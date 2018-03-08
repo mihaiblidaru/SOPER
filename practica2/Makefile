@@ -7,7 +7,7 @@
 # 
 
 CC = gcc
-EXE = ejercicio2 ejercicio3 ejercicio4 ejercicio6a ejercicio6b ejercicio8 ejercicio9
+EXE = ejercicio2 ejercicio3 ejercicio4 ejercicio6a ejercicio6b ejercicio9
 FLAGS = -Wall -g 
 
 $(mkdir doc)
@@ -29,15 +29,15 @@ ejercicio6a: ejercicio6a.c
 ejercicio6b: ejercicio6b.c
 	$(CC) $(FLAGS) $< -o $@
 	
-ejercicio8: ejercicio8.c
-	$(CC) $(FLAGS) $< -o $@
-	
-ejercicio9: ejercicio9.c
-	$(CC) $(FLAGS) $< -o $@
+ejercicio9: ejercicio9.o semaforos.o
+	$(CC) $(FLAGS) $^ -o $@
 
 semaforos.o: semaforos.c semaforos.h
-	$(CC) -c $(FLAGS) -o $@
+	$(CC) -c $(FLAGS) $< -o $@
 
+ejercicio9.o: ejercicio9.c
+	$(CC) -c $(FLAGS) $< -o $@
+	
 PHONY: clean
 
 clean:
