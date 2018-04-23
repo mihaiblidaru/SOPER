@@ -1,0 +1,23 @@
+[H]Soy 2523 y estoy trabajando
+[H]Soy 2523 y estoy trabajando
+[H]Soy 2523 y estoy trabajando
+[P]Señal de relevo
+[H]Hijo 2524 creado, señal de matar a 2523
+[H]Hijo 2523 terminado
+[H]Soy 2524 y estoy trabajando
+[H]Soy 2524 y estoy trabajando
+[H]Soy 2524 y estoy trabajando
+[P]Señal de relevo
+[H]Hijo 2525 creado, señal de matar a 2524
+[H]Hijo 2524 terminado
+[H]Soy 2525 y estoy trabajando
+[H]Soy 2525 y estoy trabajando
+[H]Soy 2525 y estoy trabajando
+[P]Señal de relevo
+[H]Hijo 2526 creado, señal de matar a 2525
+[H]Hijo 2525 terminado
+[H]Soy 2526 y estoy trabajando
+[H]Soy 2526 y estoy trabajando
+[H]Soy 2526 y estoy trabajando
+[P]Señal de relevo
+[H]Hijo 2526 terminado

@@ -1,0 +1,31 @@
+holaaaa mihai
+
+vale pues en principio el 3 esta decente, tiene un fallo que no tengo ni 
+puta idea de como quitar pero encima ni yo ni nadie xd
+
+vale lo primero esto no es un fallo pero estoy asumiendo que el productor produce las letras
+de la A a la Z y los numeros del 0 al 9 y acaba, no lo hace todo el rato en bucle
+si crees segun el enunciado que lo hace en bucle es muy facil de cambiar y no hay problema
+
+el fallo es que el consumidor esta en un while(1) en plan bucle infinito todo el rato
+entonces funciona porque el productor deja de producir y el programa se acaba peeeeero el cacho de memoria
+compartida no se borra xd
+
+mañana me pongo a darle mas vueltas porque puedes coger y decir que el productor mande una signal
+y el consumidor tenga un manejador que le saque del bucle infinito y libere recursos y tal pero 
+es un coñazo y tengo sueño
+
+
+
+
+
+
+
+HE hecho el 4 y el 5. El 5 es posible que lo haya hecho con trampa porque creo que 
+ellos quieren que use una sola cola de mensajes y yo uso dos, pero es que con una
+me hace falta menter semaforos y lo he intentado pero es que no funciona.
+Quien ha hecho los semaforos de esta forma no se en que estará pensando....
+He probado con la libreria de la práctica anterior. he probado con las funciones de linux
+directamente, no funciona.
+
+El 4 si que está bien(de hecho creo que es el ejercicio mas facil de la practica).

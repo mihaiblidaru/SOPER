@@ -7,17 +7,14 @@
 # 
 
 CC = gcc
-EXE = ejercicio2 ejercicio3 ejercicio4 ejercicio6a ejercicio6b ejercicio9
-FLAGS = -Wall -g 
+EXE = ejercicio2 ejercicio4 ejercicio6a ejercicio6b ejercicio9
+FLAGS = -Wall -g
 
 $(mkdir doc)
 
 all: $(EXE)
 
 ejercicio2: ejercicio2.c
-	$(CC) $(FLAGS) $< -o $@
-
-ejercicio3: ejercicio3.c
 	$(CC) $(FLAGS) $< -o $@
 
 ejercicio4: ejercicio4.c
@@ -43,6 +40,7 @@ PHONY: clean
 clean:
 	rm -f $(EXE) *.o
 	rm -r -f doc/
+	rm -f *.txt
 	
 doxygen:
 	rm -f -r doc/
